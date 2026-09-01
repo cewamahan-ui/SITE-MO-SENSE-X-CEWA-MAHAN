@@ -11,6 +11,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="faulty-terminal.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#work" class="nav-link">Work</a>
                 </div>
-                <a href="mailto:cewamahan.ke@gmail.com" class="hidden md:inline-flex btn-primary text-sm">Get in touch</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cewamahan.ke@gmail.com" target="_blank" class="hidden md:inline-flex btn-primary text-sm">Get in touch</a>
                 <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                     <span class="mobile-bar w-6 h-0.5 bg-ink transition-all duration-200"></span>
                     <span class="mobile-bar w-6 h-0.5 bg-ink transition-all duration-200"></span>
@@ -47,18 +48,18 @@
                 <a href="#about" class="nav-link text-lg">About</a>
                 <a href="#services" class="nav-link text-lg">Services</a>
                 <a href="#work" class="nav-link text-lg">Work</a>
-                <a href="mailto:cewamahan.ke@gmail.com" class="btn-primary text-sm mt-2 w-fit">Get in touch</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cewamahan.ke@gmail.com" target="_blank" class="btn-primary text-sm mt-2 w-fit">Get in touch</a>
             </div>
         </div>
     </nav>
     <main>
         <section id="hero" class="relative pt-32 pb-16 px-6 lg:px-8 border-b border-line overflow-hidden">
+            <div id="terminal-bg" style="position:absolute;inset:0;z-index:0;"></div>
             <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
                 <div class="lg:col-span-7 reveal">
                     <p class="eyebrow mb-5">Audio Engineer &mdash; Software Developer &mdash; Nairobi</p>
-                    <h1 class="font-display text-7xl sm:text-8xl leading-[0.9] tracking-tight text-ink">SOUND,<br><span class="text-crimson">ENGINEERED.</span></h1>
-                    <p class="font-accent italic text-3xl text-ink-soft mt-7 max-w-lg">Five years behind the board, still chasing the take that hits right.</p>
-                    <p class="text-lg text-ink-soft mt-6 max-w-xl leading-relaxed">I am Cewa &mdash; most people know me as Mo. I produce, mix and master Hip-Hop, R&amp;B, drill and afrobeat out of Nairobi, and I write the code that gets that work in front of people. Two crafts, same standard: nothing ships until it is right.</p>
+                    <h1 class="font-display text-7xl sm:text-8xl leading-[0.9] tracking-tight text-white" style="text-shadow: 0 2px 20px rgba(0,0,0,0.5);">SOUND,<br><span class="text-crimson">ENGINEERED.</span></h1>
+                    <p class="text-lg text-ink-soft mt-6 max-w-xl leading-relaxed">Hi, I&rsquo;m Cewa &mdash; most people know me as Mo. I produce, mix and master Hip-Hop, R&amp;B, drill and afrobeat out of Nairobi, and I write the code that gets that work in front of people. Two crafts, same standard: nothing ships until it is right.</p>
                     <div class="flex flex-wrap items-center gap-4 mt-9"><a href="#work" class="btn-primary">Browse the work</a></div>
                 </div>
                 <div class="lg:col-span-5 relative reveal" data-reveal-delay="120">
@@ -108,10 +109,11 @@
                 </div>
             </div>
         </section>
-        <section id="work" class="py-16 px-6 lg:px-8 bg-paper">
+        <section id="work" class="relative py-16 px-6 lg:px-8 overflow-hidden" style="background:transparent;">
+            <div id="terminal-bg-work" style="position:absolute;inset:0;z-index:0;"></div>
             <div class="max-w-6xl mx-auto">
-                <p class="eyebrow mb-4 text-center reveal">Selected discography</p>
-                <h2 class="font-display text-5xl text-ink text-center mb-12 reveal">SELECTED WORK</h2>
+                <div style="position:relative;z-index:1;">
+                <p class="text-center mb-12 reveal" style="font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; letter-spacing: 0.05em; color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.4);">Selected discography</p>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     <a href="https://youtu.be/qhmAFggYjGg?si=SDAVfS3tnB-i7lby" target="_blank" class="work-card reveal" data-reveal-delay="0"><div class="work-cover work-cover--syrup"><img src="https://img.youtube.com/vi/qhmAFggYjGg/maxresdefault.jpg" alt="SYRUP - Kay Khali" loading="lazy"></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-crimson mb-1">AUDIO &middot; 2024</p><h3 class="font-display text-xl text-ink tracking-wide">SYRUP</h3><p class="text-ink-soft text-sm mt-1">Kay Khali</p></div></a>
                     <a href="https://youtu.be/wW2-GM36-zM?si=KxkviNCJreLsDevb" target="_blank" class="work-card reveal" data-reveal-delay="80"><div class="work-cover work-cover--niko"><img src="https://img.youtube.com/vi/wW2-GM36-zM/maxresdefault.jpg" alt="NIKO FORM - Karis" loading="lazy"></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-crimson mb-1">AUDIO &middot; 2024</p><h3 class="font-display text-xl text-ink tracking-wide">NIKO FORM</h3><p class="text-ink-soft text-sm mt-1">Karis</p></div></a>
@@ -126,7 +128,7 @@
         <p class="font-display text-xl tracking-wide text-ink mb-1">MO<span class="text-crimson">SENSE</span></p>
         <p class="text-ink-soft text-sm mb-4">Cewa Mahan &mdash; Sound &amp; Code, Nairobi</p>
         <div class="flex justify-center flex-wrap gap-6 mb-5">
-            <a href="mailto:cewamahan.ke@gmail.com" class="footer-link">Email</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cewamahan.ke@gmail.com" target="_blank" class="footer-link">Email</a>
             <a href="https://www.instagram.com/topicbabymo/" class="footer-link" target="_blank">Instagram</a>
             <a href="https://github.com/cewamahan-ui" class="footer-link" target="_blank">GitHub</a>
             <a href="https://soundcloud.com/mosense" class="footer-link" target="_blank">SoundCloud</a>
@@ -134,6 +136,7 @@
         </div>
         <p class="text-ink-soft text-xs">&copy; <span id="current-year"></span> Cewa Mahan. All rights reserved.</p>
     </footer>
+    <script src="faulty-terminal.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
