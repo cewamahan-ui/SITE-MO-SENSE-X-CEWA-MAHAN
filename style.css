@@ -80,6 +80,13 @@ html.has-custom-cursor #custom-cursor { display: block; }
 .footer-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6E6659; transition: color 0.2s ease; }
 .footer-link:hover { color: #D22B1F; }
 
+/* ===== Mobile ===== */
+@media (max-width: 640px) {
+    .portrait-frame { max-width: 280px; margin: 0 auto; }
+    .portrait-badge { left: 0; font-size: 0.7rem; padding: 0.5rem 0.8rem; }
+    .eyebrow { font-size: 0.75rem; }
+}
+
 /* ===== Motion ===== */
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
