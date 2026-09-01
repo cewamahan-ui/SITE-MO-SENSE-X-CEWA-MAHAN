@@ -3,457 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOSENSE | Underground Sound Architect</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>MOSENSE | Cewa Mahan &mdash; Music Producer &amp; Developer</title>
+    <meta name="description" content="Cewa Mahan (Mo) - Audio Engineer and Software Developer based in Nairobi.">
+    <meta name="theme-color" content="#D22B1F">
+    <meta property="og:title" content="MOSENSE | Cewa Mahan">
+    <meta property="og:description" content="Audio Engineer and Software Developer based in Nairobi.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'void': '#050505',
-                        'crimson': '#DC143C',
-                        'blood': '#8B0000',
-                        'neon-red': '#FF073A',
-                        'dark-metal': '#0A0A0F',
-                        'steel': '#1A1A24',
-                        'ash': '#2A2A35',
-                    },
-                    fontFamily: {
-                        'graffiti': ['Permanent Marker', 'cursive'],
-                        'cyber': ['Orbitron', 'sans-serif'],
-                        'tech': ['Rajdhani', 'sans-serif'],
-                        'matrix': ['Share Tech Mono', 'monospace'],
-                    },
-                }
-            }
+            theme: { extend: {
+                colors: { paper: '#FAF8F4', 'paper-alt': '#F1EBE0', ink: '#17130F', 'ink-soft': '#6E6659', crimson: '#D22B1F', 'crimson-deep': '#9C1D14', line: '#E6DFD0', surface: '#FFFFFF' },
+                fontFamily: { display: ['Bebas Neue', 'sans-serif'], accent: ['Fraunces', 'serif'], sans: ['Inter', 'sans-serif'], mono: ['Space Mono', 'monospace'] },
+            }}
         }
     </script>
 </head>
-<body class="bg-void text-white overflow-x-hidden">
-
-    <!-- Animated Background Canvas -->
-    <canvas id="matrix-bg" class="fixed inset-0 z-0 opacity-30"></canvas>
-    
-    <!-- Scanline Overlay -->
-    <div class="scanlines fixed inset-0 z-10 pointer-events-none"></div>
-
-    <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
-
-    <!-- Navigation - Futuristic HUD Style -->
-    <nav class="fixed top-0 left-0 right-0 z-50 hud-nav">
-        <div class="max-w-7xl mx-auto px-6">
+<body class="antialiased bg-paper text-ink">
+    <div id="custom-cursor" aria-hidden="true"><div class="cursor-dot"></div><div class="cursor-ring"></div></div>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-line">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="#hero" class="cyber-logo">
-                    <span class="text-4xl font-cyber font-black text-crimson tracking-widest">
-                        M<span class="text-neon-red animate-pulse">O</span>SENSE
-                    </span>
-                    <div class="text-[10px] font-matrix text-ash tracking-[0.5em] -mt-1">SOUND_ARCHITECT</div>
-                </a>
-
-                <!-- Nav Links -->
-                <div class="hidden md:flex space-x-10">
-                    <a href="#manifesto" class="hud-link">MANIFESTO</a>
-                    <a href="#arsenal" class="hud-link">ARSENAL</a>
-                    <a href="#vault" class="hud-link">VAULT</a>
-                    <a href="#transmissions" class="hud-link">TRANSMISSIONS</a>
-                    <a href="#contact" class="hud-link">SIGNAL</a>
+                <a href="#hero" class="text-2xl font-display tracking-wider text-ink">MO<span class="text-crimson">SENSE</span></a>
+                <div class="hidden md:flex items-center space-x-9">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#work" class="nav-link">Work</a>
                 </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <a href="mailto:cewamahan.ke@gmail.com" class="hidden md:inline-flex btn-primary text-sm">Get in touch</a>
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="mobile-bar w-6 h-0.5 bg-ink transition-all duration-200"></span>
+                    <span class="mobile-bar w-6 h-0.5 bg-ink transition-all duration-200"></span>
+                    <span class="mobile-bar w-6 h-0.5 bg-ink transition-all duration-200"></span>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu">
-            <a href="#manifesto" class="mobile-link">MANIFESTO</a>
-            <a href="#arsenal" class="mobile-link">ARSENAL</a>
-            <a href="#vault" class="mobile-link">VAULT</a>
-            <a href="#transmissions" class="mobile-link">TRANSMISSIONS</a>
-            <a href="#contact" class="mobile-link">SIGNAL</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-line">
+            <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col space-y-5">
+                <a href="#about" class="nav-link text-lg">About</a>
+                <a href="#services" class="nav-link text-lg">Services</a>
+                <a href="#work" class="nav-link text-lg">Work</a>
+                <a href="mailto:cewamahan.ke@gmail.com" class="btn-primary text-sm mt-2 w-fit">Get in touch</a>
+            </div>
         </div>
     </nav>
-
-    <main class="relative z-20">
-
-
-        <!-- 1. Hero Section - Underground Matrix Vibe -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-void via-transparent to-void z-10"></div>
-            
-            <div class="text-center px-6 relative z-20">
-                <!-- Glitch Effect Subtitle -->
-                <div class="glitch-wrapper mb-4">
-                    <p class="font-matrix text-neon-red text-sm sm:text-base tracking-[1em] uppercase glitch-text" data-text="UNDERGROUND SOUND">
-                        UNDERGROUND SOUND
-                    </p>
+    <main>
+        <section id="hero" class="relative pt-32 pb-16 px-6 lg:px-8 border-b border-line overflow-hidden">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 reveal">
+                    <p class="eyebrow mb-5">Audio Engineer &mdash; Software Developer &mdash; Nairobi</p>
+                    <h1 class="font-display text-7xl sm:text-8xl leading-[0.9] tracking-tight text-ink">SOUND,<br><span class="text-crimson">ENGINEERED.</span></h1>
+                    <p class="font-accent italic text-3xl text-ink-soft mt-7 max-w-lg">Five years behind the board, still chasing the take that hits right.</p>
+                    <p class="text-lg text-ink-soft mt-6 max-w-xl leading-relaxed">I am Cewa &mdash; most people know me as Mo. I produce, mix and master Hip-Hop, R&amp;B, drill and afrobeat out of Nairobi, and I write the code that gets that work in front of people. Two crafts, same standard: nothing ships until it is right.</p>
+                    <div class="flex flex-wrap items-center gap-4 mt-9"><a href="#work" class="btn-primary">Browse the work</a></div>
                 </div>
-
-                <!-- Main Title with Cyber Border -->
-                <h1 class="cyber-title font-cyber font-black text-7xl sm:text-9xl lg:text-[12rem] leading-none tracking-tighter mb-6">
-                    <span class="text-gradient">MO</span><span class="text-white">SENSE</span>
-                    <div class="cyber-line"></div>
-                </h1>
-
-                <!-- Tagline -->
-                <h2 class="font-tech text-xl sm:text-3xl text-ash mb-12 tracking-widest font-light">
-                    DIGITAL <span class="text-crimson font-semibold">AUDIO</span> ENGINEERING
-                </h2>
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#vault" class="cyber-btn">
-                        <span class="btn-text">ENTER THE VAULT</span>
-                        <span class="btn-glitch"></span>
-                    </a>
-                    <a href="#contact" class="ghost-btn">
-                        <span>INITIATE CONTACT</span>
-                    </a>
-                </div>
-
-                <!-- Scroll Indicator -->
-                <div class="scroll-indicator mt-20">
-                    <div class="scroll-line"></div>
-                    <p class="font-matrix text-ash text-xs tracking-widest mt-2">SCROLL DOWN</p>
-                </div>
-            </div>
-
-            <!-- Floating Side Elements -->
-            <div class="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:block">
-                <div class="writing-mode-vertical font-matrix text-ash text-xs tracking-[0.5em]">
-                    EST. 2024 // UNDERGROUND COLLECTIVE
+                <div class="lg:col-span-5 relative reveal" data-reveal-delay="120">
+                    <div class="portrait-shell">
+                        <div class="portrait-frame">
+                            <div id="portrait-trigger" class="portrait-image-wrap" role="button" tabindex="0" aria-expanded="false" aria-controls="socials-overlay" aria-label="Show social links">
+                                <img src="mo-portrait.png" alt="Cewa Mahan, portrait" class="portrait-img">
+                                <div id="socials-overlay" class="socials-overlay">
+                                    <span class="font-mono text-xs tracking-widest text-paper mb-4">FIND ME ON</span>
+                                    <a href="https://www.instagram.com/topicbabymo/" target="_blank" class="socials-overlay-link">Instagram</a>
+                                    <a href="https://github.com/cewamahan-ui" target="_blank" class="socials-overlay-link">GitHub</a>
+                                    <a href="https://soundcloud.com/mosense" target="_blank" class="socials-overlay-link">SoundCloud</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portrait-badge"><span class="font-mono text-xs tracking-widest">ABLETON</span><span class="font-mono text-xs tracking-widest">/ FL STUDIO</span><span class="font-mono text-xs tracking-widest text-crimson">/ CODE</span></div>
+                    </div>
+                    <p id="portrait-caption" class="portrait-caption">Click the photo for socials</p>
                 </div>
             </div>
         </section>
-
-        <!-- 2. Manifesto Section -->
-        <section id="manifesto" class="py-32 relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <!-- Section Header -->
-                <div class="text-center mb-20 reveal">
-                    <div class="section-tag">// THE MANIFESTO</div>
-                    <h3 class="section-title graffiti-text">SOUND WITHOUT <span class="text-crimson">COMPROMISE</span></h3>
+        <div class="waveform-divider" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><polyline points="0,30 40,30 60,10 80,50 100,18 120,42 140,30 180,30 200,6 220,54 240,24 260,36 280,30 320,30 340,14 360,46 380,30 420,30 440,20 460,40 480,8 500,52 520,30 560,30 580,16 600,44 620,30 660,30 680,22 700,38 720,10 740,50 760,30 800,30 820,18 840,42 860,30 900,30 920,12 940,48 960,30 1000,30 1020,24 1040,36 1060,6 1080,54 1100,30 1140,30 1160,20 1180,40 1200,30" /></svg></div>
+        <section id="about" class="py-16 px-6 lg:px-8 bg-paper">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-14">
+                <div class="lg:col-span-5 reveal">
+                    <p class="eyebrow mb-4">The dual-stack approach</p>
+                    <h2 class="font-display text-5xl text-ink leading-tight mb-6">WHY BOTH<br>DISCIPLINES.</h2>
+                    <p class="text-lg text-ink-soft leading-relaxed mb-4">I came up through the Rugbones Collective, producing and beat-making, and I still work hand in hand with them &mdash; a partnership that will never die. So I picked up live sound too, and cut our setup time in half. That is the pattern: whatever is slowing the work down becomes the next thing I learn.</p>
+                    <p class="text-lg text-ink-soft leading-relaxed">Diploma in Music Production from ADMI (2023&ndash;24), now finishing a Higher Diploma in Music Production &amp; Sound Engineering. Freelance engineer at Sub Sahara Records, credits with Skrilla, Nuclear Ke and Karis &mdash; and a self-taught developer on the side.</p>
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                    <!-- Audio Architect Card -->
-                    <div class="manifesto-card sound-card reveal">
-                        <div class="manifesto-icon">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                            </svg>
-                        </div>
-                        <h4 class="manifesto-title">SOUND ARCHITECT</h4>
-                        <p class="manifesto-text">
-                            Heavy 808s that rattle your chest. Futuristic synths painting atmospheres. Complex rhythmic structures that make heads nod. I engineer sound across Hip-Hop, R&B, and Hyper Kenyan soundscapes.
-                        </p>
-                        <div class="equalizer">
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                            <div class="eq-bar"></div>
-                        </div>
-                    </div>
-
-                    <!-- Code Implementation Card -->
-                    <div class="manifesto-card code-card reveal">
-                        <div class="manifesto-icon code-icon">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                            </svg>
-                        </div>
-                        <h4 class="manifesto-title code-title">CODE IMPLEMENTATION</h4>
-                        <p class="manifesto-text code-text">
-                            Software developer wielding JavaScript and HTML to build immersive digital experiences. The same structured logic that shapes my beats shapes my code.
-                        </p>
-                        <div class="code-block">
-                            <span class="code-keyword">const</span> <span class="code-var">future</span> = <span class="code-string">"built beat by beat"</span>;
-                        </div>
-                    </div>
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-10">
+                    <div class="reveal" data-reveal-delay="80"><h3 class="font-display text-2xl text-crimson mb-4 tracking-wide">AUDIO</h3><ul class="space-y-3"><li class="skill-row">Production &amp; Arrangement</li><li class="skill-row">Mixing &amp; Mastering</li><li class="skill-row">Sound Design</li><li class="skill-row">Ableton Live / FL Studio / Logic Pro</li><li class="skill-row">Studio Session Management</li></ul></div>
+                    <div class="reveal" data-reveal-delay="180"><h3 class="font-display text-2xl text-ink mb-4 tracking-wide">CODE</h3><ul class="space-y-3"><li class="skill-row">JavaScript &amp; React</li><li class="skill-row">HTML &amp; CSS</li><li class="skill-row">Python / Flask</li><li class="skill-row">REST APIs</li><li class="skill-row">UI / UX Design</li></ul></div>
                 </div>
             </div>
         </section>
-
-        <!-- 3. Arsenal Section (Skills & Services) -->
-        <section id="arsenal" class="py-32 bg-dark-metal relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-20 reveal">
-                    <div class="section-tag">// THE ARSENAL</div>
-                    <h3 class="section-title graffiti-text">TOOLS OF THE <span class="text-crimson">TRADE</span></h3>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Service 1 -->
-                    <div class="arsenal-card reveal">
-                        <div class="arsenal-number">01</div>
-                        <h4 class="arsenal-title">BEAT STORES &<br>ARTIST SITES</h4>
-                        <p class="arsenal-desc">
-                            Custom-built from the ground up. No templates. High-converting landing pages that actually sell your sound.
-                        </p>
-                        <div class="arsenal-tags">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">CSS3</span>
-                        </div>
-                    </div>
-
-                    <!-- Service 2 -->
-                    <div class="arsenal-card reveal">
-                        <div class="arsenal-number">02</div>
-                        <h4 class="arsenal-title">AUDIO<br>VISUALIZERS</h4>
-                        <p class="arsenal-desc">
-                            Interactive, responsive visualizers that turn your tracks into shareable experiences for social and live streams.
-                        </p>
-                        <div class="arsenal-tags">
-                            <span class="tag">Web Audio API</span>
-                            <span class="tag">Canvas</span>
-                            <span class="tag">Animation</span>
-                        </div>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="arsenal-card reveal">
-                        <div class="arsenal-number">03</div>
-                        <h4 class="arsenal-title">FULL-STACK<br>APPLICATIONS</h4>
-                        <p class="arsenal-desc">
-                            Web apps, dashboards, platforms—bringing the same attention to detail from the studio to the code editor.
-                        </p>
-                        <div class="arsenal-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">APIs</span>
-                        </div>
-                    </div>
+        <div class="waveform-divider" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><polyline points="0,30 40,30 60,10 80,50 100,18 120,42 140,30 180,30 200,6 220,54 240,24 260,36 280,30 320,30 340,14 360,46 380,30 420,30 440,20 460,40 480,8 500,52 520,30 560,30 580,16 600,44 620,30 660,30 680,22 700,38 720,10 740,50 760,30 800,30 820,18 840,42 860,30 900,30 920,12 940,48 960,30 1000,30 1020,24 1040,36 1060,6 1080,54 1100,30 1140,30 1160,20 1180,40 1200,30" /></svg></div>
+        <section id="services" class="py-16 px-6 lg:px-8 bg-paper-alt">
+            <div class="max-w-6xl mx-auto">
+                <p class="eyebrow mb-4 text-center reveal">What I do</p>
+                <h2 class="font-display text-5xl text-ink text-center mb-12 reveal">SERVICES</h2>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div class="service-card reveal" data-reveal-delay="0"><span class="service-index">01</span><h3 class="font-display text-2xl text-ink mb-3 tracking-wide">MIXING &amp; MASTERING</h3><p class="text-base text-ink-soft leading-relaxed">Full mix and master passes for Hip-Hop, R&amp;B, drill and afrobeat &mdash; five years of getting records ready for release, not just for the studio speakers.</p></div>
+                    <div class="service-card reveal" data-reveal-delay="80"><span class="service-index">02</span><h3 class="font-display text-2xl text-ink mb-3 tracking-wide">BEAT PRODUCTION</h3><p class="text-base text-ink-soft leading-relaxed">Original instrumentals built from scratch for independent and signed artists, available on exclusive and non-exclusive terms.</p></div>
+                    <div class="service-card reveal" data-reveal-delay="160"><span class="service-index">03</span><h3 class="font-display text-2xl text-ink mb-3 tracking-wide">STUDIO SESSIONS</h3><p class="text-base text-ink-soft leading-relaxed">Recording engineering and session management &mdash; directing artists, running the desk, and keeping a project moving toward its deadline.</p></div>
+                    <div class="service-card reveal" data-reveal-delay="240"><span class="service-index">04</span><h3 class="font-display text-2xl text-ink mb-3 tracking-wide">ARTIST WEBSITES</h3><p class="text-base text-ink-soft leading-relaxed">Custom-built landing pages, portfolios and small tools for artists and small businesses &mdash; no templates, built from the ground up.</p></div>
                 </div>
             </div>
         </section>
-
-        <!-- 4. Beat Vault Section -->
-        <section id="vault" class="py-32 relative">
-            <div class="max-w-5xl mx-auto px-6">
-                <div class="text-center mb-20 reveal">
-                    <div class="section-tag">// THE VAULT</div>
-                    <h3 class="section-title graffiti-text">SELECTED <span class="text-crimson">WORK</span></h3>
+        <section id="work" class="py-16 px-6 lg:px-8 bg-paper">
+            <div class="max-w-6xl mx-auto">
+                <p class="eyebrow mb-4 text-center reveal">Selected discography</p>
+                <h2 class="font-display text-5xl text-ink text-center mb-12 reveal">SELECTED WORK</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <a href="https://youtu.be/qhmAFggYjGg?si=SDAVfS3tnB-i7lby" target="_blank" class="work-card reveal" data-reveal-delay="0"><div class="work-cover work-cover--syrup"><img src="https://img.youtube.com/vi/qhmAFggYjGg/maxresdefault.jpg" alt="SYRUP - Kay Khali" loading="lazy"></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-crimson mb-1">AUDIO &middot; 2024</p><h3 class="font-display text-xl text-ink tracking-wide">SYRUP</h3><p class="text-ink-soft text-sm mt-1">Kay Khali</p></div></a>
+                    <a href="https://youtu.be/wW2-GM36-zM?si=KxkviNCJreLsDevb" target="_blank" class="work-card reveal" data-reveal-delay="80"><div class="work-cover work-cover--niko"><img src="https://img.youtube.com/vi/wW2-GM36-zM/maxresdefault.jpg" alt="NIKO FORM - Karis" loading="lazy"></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-crimson mb-1">AUDIO &middot; 2024</p><h3 class="font-display text-xl text-ink tracking-wide">NIKO FORM</h3><p class="text-ink-soft text-sm mt-1">Karis</p></div></a>
+                    <a href="https://youtu.be/Yi8hiVukJ8w?si=7U5SwhOaKf2iHvcd" target="_blank" class="work-card reveal" data-reveal-delay="160"><div class="work-cover work-cover--kata"><img src="https://img.youtube.com/vi/Yi8hiVukJ8w/maxresdefault.jpg" alt="KATA KICHWA - Skrilla ft. Nuclear Ke" loading="lazy"></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-crimson mb-1">AUDIO &middot; 2026</p><h3 class="font-display text-xl text-ink tracking-wide">KATA KICHWA</h3><p class="text-ink-soft text-sm mt-1">Skrilla ft. Nuclear Ke</p></div></a>
+                    <a href="https://illectrika-kuzw11q4l-cewamahanke-8313s-projects.vercel.app/" target="_blank" class="work-card reveal" data-reveal-delay="240"><div class="work-cover work-cover--illectrika"><span class="font-display text-4xl text-paper tracking-wider opacity-70">ILLECTRIKA</span></div><div class="p-5"><p class="text-xs font-mono tracking-widest text-ink-soft mb-1">CODE</p><h3 class="font-display text-xl text-ink tracking-wide">ILLECTRIKA</h3><p class="text-ink-soft text-sm mt-1">Brand site, React &amp; Vite</p></div></a>
                 </div>
-
-                <div class="space-y-4">
-                    <!-- Beat 1 -->
-                    <div class="beat-track reveal">
-                        <div class="track-info">
-                            <div class="track-number">01</div>
-                            <div class="track-details">
-                                <h4 class="track-name">GHOST PROTOCOL</h4>
-                                <span class="track-genre">808 HEAVY // TRAP</span>
-                            </div>
-                        </div>
-                        <div class="track-controls">
-                            <div class="waveform-visual">
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                            </div>
-                            <button class="play-btn">
-                                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Beat 2 -->
-                    <div class="beat-track reveal">
-                        <div class="track-info">
-                            <div class="track-number">02</div>
-                            <div class="track-details">
-                                <h4 class="track-name">CYBER RENAISSANCE</h4>
-                                <span class="track-genre">FUTURE R&B // ATMOSPHERIC</span>
-                            </div>
-                        </div>
-                        <div class="track-controls">
-                            <div class="waveform-visual">
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                            </div>
-                            <button class="play-btn">
-                                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Beat 3 -->
-                    <div class="beat-track reveal">
-                        <div class="track-info">
-                            <div class="track-number">03</div>
-                            <div class="track-details">
-                                <h4 class="track-name">DRIP FEED</h4>
-                                <span class="track-genre">TRAP SOUL // MELODIC</span>
-                            </div>
-                        </div>
-                        <div class="track-controls">
-                            <div class="waveform-visual">
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                            </div>
-                            <button class="play-btn">
-                                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Beat 4 -->
-                    <div class="beat-track reveal">
-                        <div class="track-info">
-                            <div class="track-number">04</div>
-                            <div class="track-details">
-                                <h4 class="track-name">NAIROBI AFTER DARK</h4>
-                                <span class="track-genre">HYPER KENYAN // UNDERGROUND</span>
-                            </div>
-                        </div>
-                        <div class="track-controls">
-                            <div class="waveform-visual">
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                                <div class="wave-bar"></div>
-                            </div>
-                            <button class="play-btn">
-                                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="text-center text-ash mt-12 font-matrix text-sm">
-                    // Exclusive and Non-Exclusive licenses available upon direct contact.
-                </p>
-            </div>
-        </section>
-
-        <!-- 5. Contact Section -->
-        <section id="contact" class="py-32 bg-dark-metal relative">
-            <div class="max-w-3xl mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <div class="section-tag">// TRANSMISSION</div>
-                    <h3 class="section-title graffiti-text">SEND A <span class="text-crimson">SIGNAL</span></h3>
-                    <p class="text-ash mt-4">Got a project? Need a beat? Let's connect.</p>
-                </div>
-
-                <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/cewamahan.ke@gmail.com" method="POST">
-                    <div class="form-group">
-                        <label for="name" class="form-label">NAME</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
-                        <div class="input-line"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="form-label">EMAIL</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
-                        <div class="input-line"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message" class="form-label">MESSAGE</label>
-                        <textarea id="message" name="message" rows="6" class="form-input" placeholder="What's the project?" required></textarea>
-                        <div class="input-line"></div>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        <span class="btn-text">TRANSMIT MESSAGE</span>
-                        <span class="btn-glitch"></span>
-                    </button>
-                    
-                    <div id="form-message" class="form-response" style="display: none;"></div>
-                </form>
+                <p class="text-center text-ink-soft mt-8 text-sm">Also hear my work on <a href="https://soundcloud.com/mosense" target="_blank" class="underline hover:text-crimson">SoundCloud</a>. Exclusive and non-exclusive beat licenses available on request.</p>
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-void border-t border-ash py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <!-- Brand -->
-                <div>
-                    <div class="text-2xl font-cyber font-black text-crimson mb-2">
-                        M<span class="text-neon-red">O</span>SENSE
-                    </div>
-                    <p class="text-ash text-sm font-matrix">Underground Sound Architect</p>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="flex flex-col space-y-2">
-                    <a href="#manifesto" class="footer-link">Manifesto</a>
-                    <a href="#arsenal" class="footer-link">Arsenal</a>
-                    <a href="#vault" class="footer-link">Vault</a>
-                    <a href="#contact" class="footer-link">Contact</a>
-                </div>
-
-                <!-- Social -->
-                <div class="flex flex-col space-y-3">
-                    <a href="https://github.com/cewamahan-ui" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                    </a>
-                    <a href="https://www.instagram.com/topicbabymo/" class="social-link" target="_blank" rel="noopener noreferrer">
-                        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                        Instagram
-                    </a>
-                    <a href="mailto:cewamahan.ke@gmail.com" class="social-link">
-                        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        cewamahan.ke@gmail.com
-                    </a>
-                    <a href="tel:+254721618572" class="social-link">
-                        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        +254 721 618 572
-                    </a>
-                </div>
-            </div>
-
-            <div class="border-t border-ash pt-6 text-center">
-                <p class="font-matrix text-ash text-xs">
-                    &copy; <span id="current-year"></span> MOSENSE // ALL RIGHTS RESERVED
-                </p>
-            </div>
+    <footer class="border-t border-line py-9 px-6 text-center">
+        <p class="font-display text-xl tracking-wide text-ink mb-1">MO<span class="text-crimson">SENSE</span></p>
+        <p class="text-ink-soft text-sm mb-4">Cewa Mahan &mdash; Sound &amp; Code, Nairobi</p>
+        <div class="flex justify-center flex-wrap gap-6 mb-5">
+            <a href="mailto:cewamahan.ke@gmail.com" class="footer-link">Email</a>
+            <a href="https://www.instagram.com/topicbabymo/" class="footer-link" target="_blank">Instagram</a>
+            <a href="https://github.com/cewamahan-ui" class="footer-link" target="_blank">GitHub</a>
+            <a href="https://soundcloud.com/mosense" class="footer-link" target="_blank">SoundCloud</a>
+            <a href="https://www.linkedin.com/in/cewamahan/" class="footer-link" target="_blank">LinkedIn</a>
         </div>
+        <p class="text-ink-soft text-xs">&copy; <span id="current-year"></span> Cewa Mahan. All rights reserved.</p>
     </footer>
-
     <script src="index.js"></script>
 </body>
 </html>
